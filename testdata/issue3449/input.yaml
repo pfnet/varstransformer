@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kustomize-vars
+data:
+  DBT_TARGET: development
+  SUSPENDED: "True"
+---
+# https://github.com/kubernetes-sigs/kustomize/blob/78ce39820d5a5548c9e7facf001b517727321c7d/api/krusty/variableref_test.go#L472-L490
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: cron-core-load-workflow
+spec:
+  schedule: "45 2 * * *"
+  timezone: "Europe/Vienna"
+  concurrencyPolicy: Forbid
+  suspend: $(SUSPENDED)
+  workflowMetadata:
+    labels:
+      workflowName: core-load-workflow
+  workflowSpec:
+    workflowTemplateRef:
+      name: core-load-pipeline
+    arguments:
+      parameters:
+        - name: dbt_target
+          value: $(DBT_TARGET)

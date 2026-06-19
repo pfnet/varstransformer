@@ -1,0 +1,21 @@
+# https://github.com/kubernetes-sigs/kustomize/blob/78ce39820d5a5548c9e7facf001b517727321c7d/api/krusty/variableref_test.go#L1394-L1407
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+  labels:
+    my-label: my-namespace
+  annotations:
+    my-annotation: my-namespace
+spec:
+  template:
+    spec:
+      containers:
+      - name: app
+        image: busybox
+---
+# https://github.com/kubernetes-sigs/kustomize/blob/78ce39820d5a5548c9e7facf001b517727321c7d/api/krusty/variableref_test.go#L1394-L1407
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: my-namespace

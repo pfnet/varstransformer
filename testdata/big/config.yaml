@@ -1,0 +1,42 @@
+apiVersion: preferred.jp/v1alpha1
+kind: VarsTransformer
+metadata:
+  name: vars
+# https://github.com/kubernetes-sigs/kustomize/blob/78ce39820d5a5548c9e7facf001b517727321c7d/api/krusty/variableref_test.go#L561-L597
+vars:
+ - name: CDB_PUBLIC_SVC
+   objref:
+        kind: Service
+        name: cockroachdb-public
+        apiVersion: v1
+   fieldref:
+        fieldpath: metadata.name
+ - name: CDB_STATEFULSET_NAME
+   objref:
+        kind: StatefulSet
+        name: cockroachdb
+        apiVersion: apps/v1beta1
+   fieldref:
+        fieldpath: metadata.name
+ - name: CDB_HTTP_PORT
+   objref:
+        kind: StatefulSet
+        name: cockroachdb
+        apiVersion: apps/v1beta1
+   fieldref:
+        fieldpath: spec.template.spec.containers[0].ports[1].containerPort
+ - name: CDB_STATEFULSET_SVC
+   objref:
+        kind: Service
+        name: cockroachdb
+        apiVersion: v1
+   fieldref:
+        fieldpath: metadata.name
+
+ - name: TEST_CONFIG_MAP
+   objref:
+        kind: ConfigMap
+        name: test-config-map
+        apiVersion: v1
+   fieldref:
+        fieldpath: metadata.name

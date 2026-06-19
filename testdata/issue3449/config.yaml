@@ -1,0 +1,27 @@
+apiVersion: preferred.jp/v1alpha1
+kind: VarsTransformer
+metadata:
+  name: vars
+# https://github.com/kubernetes-sigs/kustomize/blob/78ce39820d5a5548c9e7facf001b517727321c7d/api/krusty/variableref_test.go#L458-L469
+vars:
+- name: DBT_TARGET
+  objref: &config-map-ref
+    kind: ConfigMap
+    name: kustomize-vars
+    version: v1
+  fieldref:
+    fieldpath: data.DBT_TARGET
+- name: SUSPENDED
+  objref: *config-map-ref
+  fieldref:
+    fieldpath: data.SUSPENDED
+# https://github.com/kubernetes-sigs/kustomize/blob/78ce39820d5a5548c9e7facf001b517727321c7d/api/krusty/variableref_test.go#L500-L508
+varReference:
+  - path: spec/workflowSpec/arguments/parameters/value
+    kind: CronWorkflow
+    group: argoproj.io
+    version: v1alpha1
+  - path: spec
+    kind: CronWorkflow
+    group: argoproj.io
+    version: v1alpha1

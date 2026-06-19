@@ -1,0 +1,13 @@
+apiVersion: preferred.jp/v1alpha1
+kind: VarsTransformer
+metadata:
+  name: vars
+# https://github.com/kubernetes-sigs/kustomize/blob/78ce39820d5a5548c9e7facf001b517727321c7d/api/krusty/variableref_test.go#L1596-L1603
+vars:
+- name: NFS_SERVER_SERVICE_NAME
+  objref:
+    kind: Service
+    name: nfs-server-service
+    apiVersion: v1
+  fieldref:
+    fieldpath: metadata.name

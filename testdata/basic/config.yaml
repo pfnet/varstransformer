@@ -1,0 +1,13 @@
+apiVersion: preferred.jp/v1alpha1
+kind: VarsTransformer
+metadata:
+  name: vars
+# https://github.com/kubernetes-sigs/kustomize/blob/78ce39820d5a5548c9e7facf001b517727321c7d/api/krusty/variableref_test.go#L19-L26
+vars:
+- name: POD_NAME
+  objref:
+    apiVersion: v1
+    kind: Pod
+    name: clown
+  fieldref:
+    fieldpath: metadata.name

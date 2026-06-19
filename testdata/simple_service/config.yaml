@@ -1,0 +1,13 @@
+apiVersion: preferred.jp/v1alpha1
+kind: VarsTransformer
+metadata:
+  name: vars
+# https://github.com/kubernetes-sigs/kustomize/blob/78ce39820d5a5548c9e7facf001b517727321c7d/api/krusty/variableref_test.go#L369-L376
+vars:
+ - name: THE_PORT
+   objref:
+     kind: StatefulSet
+     name: cockroachdb
+     apiVersion: apps/v1beta1
+   fieldref:
+     fieldpath: spec.template.spec.containers[0].ports[1].containerPort

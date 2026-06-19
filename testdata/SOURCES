@@ -1,0 +1,4 @@
+Portions of the test data in this directory are copied from kubernetes-sigs/kustomize,
+licensed under the Apache License, Version 2.0.
+
+The copied portions are identified by comments in each file.

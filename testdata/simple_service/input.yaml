@@ -1,0 +1,27 @@
+# https://github.com/kubernetes-sigs/kustomize/blob/78ce39820d5a5548c9e7facf001b517727321c7d/api/krusty/variableref_test.go#L379-L387
+apiVersion: v1
+kind: Service
+metadata:
+  name: myService
+spec:
+  ports:
+  - port: $(THE_PORT)
+    targetPort: $(THE_PORT)
+    name: grpc
+---
+# https://github.com/kubernetes-sigs/kustomize/blob/78ce39820d5a5548c9e7facf001b517727321c7d/api/krusty/variableref_test.go#L390-L404
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: cockroachdb
+spec:
+  template:
+    spec:
+      containers:
+      - name: cockroachdb
+        image: cockroachdb/cockroach:v1.1.5
+        ports:
+        - containerPort: 26257
+          name: grpc
+        - containerPort: 8888
+          name: http

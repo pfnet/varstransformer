@@ -1,0 +1,18 @@
+# https://github.com/kubernetes-sigs/kustomize/blob/78ce39820d5a5548c9e7facf001b517727321c7d/api/krusty/variableref_test.go#L1129-L1132
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginxDep
+---
+# https://github.com/kubernetes-sigs/kustomize/blob/78ce39820d5a5548c9e7facf001b517727321c7d/api/krusty/variableref_test.go#L1136-L1146
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: nginxIngress
+spec:
+  rules:
+  - host: nginxDep.example.com
+  tls:
+  - hosts:
+    - nginxDep.example.com
+    secretName: nginxDep.example.com-tls

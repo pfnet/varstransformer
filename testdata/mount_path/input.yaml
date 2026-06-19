@@ -1,0 +1,26 @@
+# https://github.com/kubernetes-sigs/kustomize/blob/78ce39820d5a5548c9e7facf001b517727321c7d/api/krusty/variableref_test.go#L1324-L1342
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: my-deployment
+  spec:
+    template:
+      spec:
+        containers:
+        - name: app
+          image: busybox
+          volumeMounts:
+          - name: my-volume
+            mountPath: "/$(NAMESPACE)"
+          env:
+          - name: NAMESPACE
+            value: $(NAMESPACE)
+        volumes:
+        - name: my-volume
+          emptyDir: {}
+---
+# https://github.com/kubernetes-sigs/kustomize/blob/78ce39820d5a5548c9e7facf001b517727321c7d/api/krusty/variableref_test.go#L1345-L1348
+  apiVersion: v1
+  kind: Namespace
+  metadata:
+    name: my-namespace

@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: team-a-sample
+  namespace: team-a
+  annotations:
+    internal.config.kubernetes.io/previousNames: sample
+    internal.config.kubernetes.io/previousNamespaces: team-a
+    internal.config.kubernetes.io/previousKinds: ConfigMap
+data:
+  value: from-team-a
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: team-b-sample
+  namespace: team-b
+  annotations:
+    internal.config.kubernetes.io/previousNames: sample
+    internal.config.kubernetes.io/previousNamespaces: team-b
+    internal.config.kubernetes.io/previousKinds: ConfigMap
+data:
+  value: from-team-b
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer
+  namespace: workload
+spec:
+  selector:
+    matchLabels:
+      app: consumer
+  template:
+    metadata:
+      labels:
+        app: consumer
+    spec:
+      containers:
+      - name: app
+        image: nginx
+        env:
+        - name: CM_VALUE
+          value: "$(CM_VALUE)"
