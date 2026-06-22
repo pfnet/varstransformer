@@ -1,5 +1,8 @@
 FROM --platform=${BUILDPLATFORM} docker.io/library/golang:1.26.4 AS builder
 
+ARG TARGETOS
+ARG TARGETARCH
+
 WORKDIR /app/
 
 COPY go.mod go.sum ./
