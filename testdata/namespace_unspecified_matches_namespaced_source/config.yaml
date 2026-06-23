@@ -1,0 +1,12 @@
+apiVersion: preferred.jp/v1alpha1
+kind: VarsTransformer
+metadata:
+  name: vars
+vars:
+- name: CM_VALUE
+  objref:
+    apiVersion: v1
+    kind: ConfigMap
+    name: sample
+  fieldref:
+    fieldpath: data.value

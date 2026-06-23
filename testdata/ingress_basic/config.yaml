@@ -1,0 +1,13 @@
+apiVersion: preferred.jp/v1alpha1
+kind: VarsTransformer
+metadata:
+  name: vars
+# https://github.com/kubernetes-sigs/kustomize/blob/78ce39820d5a5548c9e7facf001b517727321c7d/api/krusty/variableref_test.go#L1119-L1126
+vars:
+- name: DEPLOYMENT_NAME
+  objref:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nginxDep
+  fieldref:
+    fieldpath: metadata.name

@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: current-sample
+  namespace: team-a
+  annotations:
+    internal.config.kubernetes.io/previousNames: sample,older-sample
+    internal.config.kubernetes.io/previousNamespaces: team-a
+    internal.config.kubernetes.io/previousKinds: ConfigMap,ConfigMap
+data:
+  value: broken
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumer
+spec:
+  selector:
+    matchLabels:
+      app: consumer
+  template:
+    metadata:
+      labels:
+        app: consumer
+    spec:
+      containers:
+      - name: app
+        image: nginx
+        env:
+        - name: CM_VALUE
+          value: "$(CM_VALUE)"

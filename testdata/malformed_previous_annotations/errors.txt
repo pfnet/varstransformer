@@ -1,0 +1,1 @@
+build resource ids for team-a/current-sample: number of previous names, number of previous namespaces, number of previous kinds not equal

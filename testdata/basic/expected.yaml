@@ -1,0 +1,15 @@
+# https://github.com/kubernetes-sigs/kustomize/blob/78ce39820d5a5548c9e7facf001b517727321c7d/api/krusty/variableref_test.go#L30-L43
+apiVersion: v1
+kind: Pod
+metadata:
+  name: clown
+spec:
+  containers:
+  - name: frown
+    image: frown
+    command:
+    - echo
+    - clown
+    env:
+    - name: FOO
+      value: clown
