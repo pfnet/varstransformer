@@ -1,8 +1,8 @@
 # VarsTransformer
 
-VarsTransformer is a KRM Function which provides `vars`-style substitution without relying on Kustomize's deprecated built-in `vars` feature.
+VarsTransformer is a Kustomize plugin implemented as a KRM function, providing `vars`-style substitution without relying on Kustomize's deprecated built-in `vars` feature.
 
-This project keeps the familiar `vars` and `varReference` configuration format, so existing users of Kustomize `vars` can migrate from a deprecated built-in feature easily.
+This project keeps the familiar `vars` and `varReference` configuration format, so existing users of Kustomize `vars` can migrate from the deprecated built-in feature easily.
 
 ## How to use
 
