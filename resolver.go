@@ -102,7 +102,7 @@ func FindObject(items []*yaml.RNode, t types.Target) (*yaml.RNode, error) {
 
 func formatResourceRef(id resid.ResId) string {
 	if id.Namespace == "" {
-		return fmt.Sprintf("%s", id.Name)
+		return id.Name
 	}
 	return fmt.Sprintf("%s/%s", id.Namespace, id.Name)
 }
